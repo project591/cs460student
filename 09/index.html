@@ -18,7 +18,7 @@
       import { TrackballControls } from 'https://threejs.org/examples/jsm/controls/TrackballControls.js';
       import { PLYLoader } from 'https://threejs.org/examples/jsm/loaders/PLYLoader.js';
 
-      let scene, camera, renderer, effect, ambientLight, directionalLight, light, mesh, toonMaterial, controls, controller;
+      let scene, camera, renderer, effect, ambientLight, directionalLight, light, mesh, toonMaterial, controls, controller, toonMaterial_2;
 
       window.onload = function() {
 
@@ -42,8 +42,6 @@
 
         // TODO Part 3 (add 2 pointlights)
 
-
-
         var loader = new PLYLoader();
         loader.load('armadillo.ply', function (geometry) {
 
@@ -62,6 +60,22 @@
         // TODO Part 1, load another mesh
         // TODO Part 2, use a different material for this mesh
 
+		 loader.load('armadillo.ply', function (geometry) {
+
+          geometry.computeVertexNormals();
+
+          toonMaterial_2 = new THREE.MeshStandardMaterial( { color: 0x0055ff, flatShading: true } );
+
+          mesh = new THREE.Mesh( geometry, toonMaterial_2 );
+          mesh.position.z = 0;
+          mesh.position.y = 0;
+		  mesh.position.x = 150; 
+          mesh.scale.multiplyScalar( 1.03 );
+         // mesh.rotation.z = Math.PI / 18;
+         // mesh.rotation.x = - Math.PI / 8;
+          scene.add( mesh );
+
+        } );
 
 
         controller = {
